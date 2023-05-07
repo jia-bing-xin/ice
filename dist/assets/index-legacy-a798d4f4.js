@@ -1,1 +1,0 @@
-System.register(["./index-legacy-15e4101e.js"],(function(e,t){"use strict";var n,r;return{setters:[e=>{n=e.u,r=e.j}],execute:function(){e("default",(()=>{const e=n();return r.jsx("div",{onClick:()=>{e("/home")},children:"login"})}))}}}));
