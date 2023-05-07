@@ -1,48 +1,34 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "noEmit": true,
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": false,
-    "jsx": "preserve",
-    "types": [
-      // "element-plus/global"
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
     ],
-    "sourceMap": true,
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "strictFunctionTypes": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "allowJs": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     "baseUrl": ".",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
-    "skipLibCheck": true,
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
+    "src"
   ],
   "references": [
     {
