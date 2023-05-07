@@ -4,6 +4,8 @@ import type { UserConfig, ConfigEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import legacy from '@vitejs/plugin-legacy'
 import vitePluginImp from 'vite-plugin-imp'
+import WindiCSS from 'vite-plugin-windicss'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 const root = process.cwd()
 const pathResolve = (dir: string) => resolve(root, '.', dir)
@@ -20,6 +22,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: env.VITE_BASE_PATH || './',
     plugins: [
       react(),
+      WindiCSS(),
       legacy({
         targets: ['defaults', 'not IE 11']
       }),
@@ -30,6 +33,15 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             style: (name) => `antd/es/${name}/style`,
           },
         ],
+      }),
+      //修改项目title
+      createHtmlPlugin({
+        inject: {
+          data: {
+            title: env.VITE_APP_TITLE || 'ice',
+            injectScript: `<script src="./inject.js"></script>`
+          }
+        }
       }),
     ],
     resolve: {
@@ -60,6 +72,33 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         }
       },
       emptyOutDir: false // 默认情况下，若 outDir 在 root 目录下，则 Vite 会在构建时清空该目录
+    },
+    json: {
+      namedExports: true, //是否支持从 .json 文件中进行按名导入
+      stringify: true,//导入的json会被转为 export default JSON.parse("..")
+    },
+    server: {
+      host: '0.0.0.0',
+      port: 3000,
+      strictPort: false,//端口被占用尝试下一个可用端口
+      open: true,
+      proxy: {
+        '/basic-api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(new RegExp(`^/mock-api`), ''),
+          // only https
+          // secure: false
+        },
+      },
+      hmr: {
+        overlay: false
+      },
+      fs: {
+        strict: true, //限制为工作区 root 路径以外的文件的访问
+        allow: ['..'],//限制哪些文件可以通过 /@fs/ 路径提供服务
+      }
     },
   }
 }
