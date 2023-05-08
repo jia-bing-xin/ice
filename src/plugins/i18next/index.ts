@@ -12,7 +12,7 @@ i18n
             en: { translation: en },
             zh: { translation: zh_CN },
         },
-        fallbackLng: 'en',
+        fallbackLng: localStorage.getItem("lang") || 'zh',
         preload: ['en', 'zh'],
         interpolation: {
             escapeValue: false,

@@ -7,11 +7,14 @@ import { HashRouter } from 'react-router-dom';
 import App from './App'
 // 初始化多语言
 import '@/plugins/i18next'
+import Provider from '@/components/Provider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <Provider>
+        <App />
+      </Provider>
     </HashRouter>
   </React.StrictMode>
 )
