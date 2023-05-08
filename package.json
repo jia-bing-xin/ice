@@ -17,6 +17,7 @@
     "@vitejs/plugin-legacy": "^4.0.3",
     "animate.css": "^4.1.1",
     "antd": "^5.4.7",
+    "events": "^3.3.0",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "normalize.css": "^8.0.1",
