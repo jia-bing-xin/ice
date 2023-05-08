@@ -11,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const changeStore = () => {
         dispatch({ type: "add3", val: 100 })
-        dispatch(numStatus.asyncActions.asyncAdd1)
+        dispatch(numStatus.asyncActions!.asyncAdd1 as any)
     }
     return (
         <>
