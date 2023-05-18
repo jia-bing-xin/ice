@@ -83,11 +83,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       strictPort: false,//端口被占用尝试下一个可用端口
       open: true,
       proxy: {
-        '/basic-api': {
-          target: 'http://localhost:3000',
+        [env.VITE_API_BASEPATH]: {
+          target: env.VITE_API_BASEPATH,
           changeOrigin: true,
           ws: true,
-          rewrite: (path) => path.replace(new RegExp(`^/mock-api`), ''),
+          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_API_BASEPATH}`), ''),
           // only https
           // secure: false
         },
