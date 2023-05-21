@@ -11,10 +11,10 @@ VITE_DEV_SERVER_LOCA = 'http://localhost:8000'
 VITE_BASE_PATH = './'
 
 # 是否删除debugger
-VITE_DROP_DEBUGGER = false
+VITE_DROP_DEBUGGER = true
 
 # 是否删除console.log
-VITE_DROP_CONSOLE = false
+VITE_DROP_CONSOLE = true
 
 # 是否sourcemap
 VITE_SOURCEMAP = true

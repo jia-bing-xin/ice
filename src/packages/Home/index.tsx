@@ -12,9 +12,7 @@ const home = () => {
         navigate('/login')
     }
     const changeLang = () => {
-        console.log(lang, 1)
         setLang(lang == 'zh' ? 'en' : 'zh', (data: string) => {
-            console.log(data, 2)
             event.emit('lang', data)
         })
     }

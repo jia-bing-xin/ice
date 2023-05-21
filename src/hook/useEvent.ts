@@ -14,7 +14,7 @@ export const useEvent = (option?: Option) => {
             return () => {
                 event.removeListener(option.name, option.callback)
             }
-        })
+        }, [option.name])
     }
     return event
 }
