@@ -1,22 +1,16 @@
-import { useDispatch } from "react-redux"
-import numStatus from "@/store/NumStatus"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from 'react-i18next'
 import { Button } from 'antd';
 
 const Login = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate()
     const goHome = () => {
         navigate('/home')
     }
-    const dispatch = useDispatch();
-    const changeStore = () => {
-        dispatch({ type: "add3", val: 100 })
-        dispatch(numStatus.asyncActions!.asyncAdd1 as any)
-    }
     return (
         <>
-            <div onClick={goHome}>login</div>
-            <Button type="primary" onClick={changeStore}>store</Button>
+            <Button type="primary" onClick={goHome}>{ t('login') }</Button>
         </>)
 }
 export default Login
