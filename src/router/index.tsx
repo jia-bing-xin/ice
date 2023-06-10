@@ -3,11 +3,12 @@ import { Navigate } from "react-router-dom"
 import type { RouteObject } from "react-router-dom"
 
 
-const Login = lazy(() => import("@/packages/Login"))
-const Home = lazy(() => import("@/packages/Home"))
+const Login = lazy(() => import("@/views/Login"))
+const Home = lazy(() => import("@/views/Home"))
+const InitializeLoading = lazy(() => import("@/components/Loading/initialize"))
 
-const withLoadingComponent = (comp: JSX.Element) => (
-    <React.Suspense fallback={<div>Loading...</div>}>
+const withLoadingComponent = (comp: JSX.Element, loading = <InitializeLoading />) => (
+    <React.Suspense fallback={loading}>
         {comp}
     </React.Suspense>
 )

@@ -93,7 +93,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
       },
       hmr: {
-        overlay: false
+        overlay: true //开启热更新
       },
       fs: {
         strict: true, //限制为工作区 root 路径以外的文件的访问
