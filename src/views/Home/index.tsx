@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useEvent } from "@/hook/useEvent";
 // import { useState } from 'react'
 import { useCallbackState } from '@/hook/useCallbackState';
-const home = () => {
+const Home = () => {
     const navigate = useNavigate()
     const event = useEvent()
     const [lang, setLang] = useCallbackState(localStorage.getItem("lang") || 'zh')
@@ -21,4 +21,4 @@ const home = () => {
         <Button type="primary" onClick={changeLang}>event</Button>
     </>)
 }
-export default home
+export default Home

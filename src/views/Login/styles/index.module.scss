@@ -1,4 +1,61 @@
-.div{
-    color: #fff;
-    background: #000;
+.login{
+    display: flex;
+    min-height: 500px;
+    .box{
+        width: 50vw;
+        height: 100vh;
+        min-height: 500px;
+        background: url('src/assets/svg/login-bg.svg') no-repeat;
+        background-position: 100%;
+        background-size: auto 100%;
+        .title{
+            height: 52px;
+            line-height: 52px;
+            margin: 4vh 6vw;
+            .react_img{
+                height: 48px;
+                animation: logo-spin infinite 20s linear;
+            }
+            span{
+                display: inline-block;
+                margin-left: 20px;
+                vertical-align: top;
+                font-size: 38px;
+                font-weight: 600;
+                color: #fff;
+            }
+        }
+        .content{
+            height: 52px;
+            line-height: 52px;
+            margin: 18vh 6vw;
+            img{
+                height: 178px;
+            }
+            .tl{
+                display: block;
+                margin-top: 10vh;
+                color: #fff;
+                font-size: 26px;
+            }
+            .sy{
+                display: block;
+                color: #fff;
+            }
+        }
+    }
+    .from{
+
+    }
+}
+
+//react logo转动
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

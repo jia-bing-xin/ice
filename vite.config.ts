@@ -54,10 +54,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: '@import "./src/styles/variable.scss";',
-          modifyVars: {
-            '@primary-color': '#4377FE',//设置antd主题色
-          },
+          additionalData: '@import "./src/styles/var/index.scss";'
         },
       }
     },

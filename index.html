@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="./src/assets/svg/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>
     <%= title %>
@@ -131,7 +131,7 @@
         width: 100%;
         height: 336px;
         /* 注意这里不要写no-repeat 否则图片动画结束之后会有空白 */
-        background: url('./public/小熊背景.png');
+        background: url('./src/assets/img/小熊背景.png');
         animation: bg-move 25s linear infinite;
       }
 
@@ -142,7 +142,7 @@
         bottom: 15px;
         width: 200px;
         height: 100px;
-        background: url('./public/小熊.png') no-repeat;
+        background: url('./src/assets/img/小熊.png') no-repeat;
         /* 元素可以添加多个动画，用逗号分割即可 */
         animation: bear 1s steps(8) infinite, move 3s linear forwards;
       }
@@ -184,10 +184,10 @@
     </style>
     <div class='logo'>
       <a href="https://vitejs.dev" class="vite_logo" target="_blank">
-        <img src="./public/vite.svg" alt="Vite logo" class='vite_img' />
+        <img src="./src/assets/svg/vite.svg" alt="Vite logo" class='vite_img' />
       </a>
       <a href="https://react.dev" class="react_logo" target="_blank">
-        <img src='./public/react.svg' alt="React logo" class="react_img" />
+        <img src='./src/assets/svg/react.svg' alt="React logo" class="react_img" />
       </a>
     </div>
     <div class="loading">

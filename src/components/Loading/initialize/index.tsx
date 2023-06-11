@@ -1,7 +1,8 @@
 import style from './styles/index.module.scss'
-import viteLogo from '/vite.svg'
-import reactLogo from '/react.svg'
-const initialize = () => {
+import viteLogo from '@/assets/svg/vite.svg'
+import reactLogo from '@/assets/svg/react.svg'
+import { Spin } from 'antd';
+const Initialize = () => {
     return (
         <>
             <div className={style.logo}>
@@ -13,7 +14,7 @@ const initialize = () => {
                 </a>
             </div>
             <div className={style.loading}>
-                <i></i><i></i><i></i><i></i>
+                <Spin size="large" />
             </div>
             <div className={style.title}>
                 {import.meta.env.VITE_APP_TITLE}
@@ -21,4 +22,4 @@ const initialize = () => {
         </>
     )
 }
-export default initialize
+export default Initialize

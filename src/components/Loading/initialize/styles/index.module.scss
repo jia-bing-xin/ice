@@ -32,76 +32,13 @@
     }
 }
 
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .loading {
-    display: inline-block;
     position: absolute;
     left: 50%;
-    top: 46%;
-    margin-left: -24px;
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    margin-top: 30px;
-    transform: rotate(45deg);
-    animation: ant-rotate 1.2s infinite linear;
-    font-size: 32px;
-
-    i {
-        display: block;
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        animation: ant-spin-move 1s infinite linear alternate;
-        border-radius: 100%;
-        opacity: 0.3;
-        background-color: #0065cc;
-        
-        &:nth-child(1) {
-            top: 0;
-            left: 0;
-          }
-  
-          &:nth-child(2) {
-            top: 0;
-            right: 0;
-            animation-delay: 0.4s;
-          }
-  
-          &:nth-child(3) {
-            right: 0;
-            bottom: 0;
-            animation-delay: 0.8s;
-          }
-  
-          &:nth-child(4) {
-            bottom: 0;
-            left: 0;
-            animation-delay: 1.2s;
-          }
-    }
+    top: 52%;
+    transform: translate(-50%,-50%) scale(1.5);
 }
 
-@keyframes ant-rotate {
-    to {
-      transform: rotate(405deg);
-    }
-  }
-
-@keyframes ant-spin-move {
-    to {
-      opacity: 1;
-    }
-  }
 
 .title{
     position: absolute;
@@ -110,4 +47,15 @@
     transform: translate(-50%, -50%);
     color: rgb(0 0 0 / 85%);
     font-size: 30px;
+}
+
+//react logo转动
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
