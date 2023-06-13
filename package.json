@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite --mode dev",
     "pro": "vite --mode pro",
     "test": "vite --mode test",
