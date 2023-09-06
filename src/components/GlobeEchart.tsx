@@ -1,59 +1,97 @@
-import React, { useEffect } from 'react';
-import BMap from 'bmapgl';
-import echarts from 'echarts';
-import 'echarts-gl';
-
-const BaiduMapWithECharts = () => {
+import { useEffect } from 'react';
+// import { Map, Marker, InfoWindow } from 'react-bmapgl';
+import * as echarts from 'echarts';
+function BaiduMapWithECharts() {
   useEffect(() => {
-    // 创建百度地图实例
-    const map = new BMap.Map("map-container");
-
-    // 初始化地图
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-
-    // 创建ECharts地球实例
-    const chart = echarts.init(document.getElementById('echarts-container'), 'dark');
-
-    // 添加地球图层
-    chart.setOption({
-      globe: {},
-      series: []
-    });
-
-    // 监听地图缩放事件
-    map.addEventListener('zoomend', function () {
-      const zoom = map.getZoom();
-      // 在ECharts地球上设置相应缩放
-      chart.setOption({
-        globe: {
-          viewControl: {
-            distance: zoom * 100
+    var chartDom = document.getElementById('mapContainer');
+    var myChart = echarts.init(chartDom);
+    const option = {
+      title: {
+        text: 'Temperature Change in the Coming Week'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {},
+      toolbox: {
+        show: true,
+        feature: {
+          dataZoom: {
+            yAxisIndex: 'none'
+          },
+          dataView: { readOnly: false },
+          magicType: { type: ['line', 'bar'] },
+          restore: {},
+          saveAsImage: {}
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value} °C'
+        }
+      },
+      series: [
+        {
+          name: 'Highest',
+          type: 'line',
+          data: [10, 11, 13, 11, 12, 12, 9],
+          markPoint: {
+            data: [
+              { type: 'max', name: 'Max' },
+              { type: 'min', name: 'Min' }
+            ]
+          },
+          markLine: {
+            data: [{ type: 'average', name: 'Avg' }]
+          }
+        },
+        {
+          name: 'Lowest',
+          type: 'line',
+          data: [1, -2, 2, 5, 3, 2, 0],
+          markPoint: {
+            data: [{ name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }]
+          },
+          markLine: {
+            data: [
+              { type: 'average', name: 'Avg' },
+              [
+                {
+                  symbol: 'none',
+                  x: '90%',
+                  yAxis: 'max'
+                },
+                {
+                  symbol: 'circle',
+                  label: {
+                    position: 'start',
+                    formatter: 'Max'
+                  },
+                  type: 'max',
+                  name: '最高点'
+                }
+              ]
+            ]
           }
         }
-      });
-    });
-
-    // 在ECharts地球上监听鼠标点击事件
-    chart.on('click', function (params) {
-      const { lat, lng } = params.value;
-      // 在百度地图上找到对应的位置并进行相关操作
-      const point = new BMap.Point(lng, lat);
-      map.centerAndZoom(point, map.getZoom());
-    });
-
-    // 在组件卸载时销毁地图和地球实例，以防止内存泄漏
+      ]
+    };
+    option && myChart.setOption(option);
     return () => {
-      map.clearOverlays();
-      chart.dispose();
+      myChart.dispose();
     };
   }, []);
-
   return (
-    <div>
-      <div id="map-container" style={{ width: '50%', height: '400px', float: 'left' }}></div>
-      <div id="echarts-container" style={{ width: '50%', height: '400px', float: 'left' }}></div>
+    <div id="mapContainer" style={{ width: "100%", height: "500px" }}>
+      {/* 这里可以添加更多的 react-bmapgl 组件，例如标记点 */}
     </div>
   );
-};
+}
 
 export default BaiduMapWithECharts;
