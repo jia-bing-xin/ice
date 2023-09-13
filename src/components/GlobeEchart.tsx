@@ -1,96 +1,130 @@
 import { useEffect } from 'react';
-// import { Map, Marker, InfoWindow } from 'react-bmapgl';
 import * as echarts from 'echarts';
-function BaiduMapWithECharts() {
+import 'echarts-gl';
+import mapImg from '@/assets/img/地球.jpg'
+function BaiduMapWithECharts(props: any) {
+  const rodamData = (num = 100) => {
+    // 模拟数据，构造飞线的起始经纬度
+    let longitude = 116.2;
+    let latitude = 39.56;
+    const res = []
+    // 随机数据 i控制线数量
+    for (let i = 0; i < num; i++) {
+      let longitude2 = Math.random() * 360 - 180;
+      let latitude2 = Math.random() * 180 - 90;
+      res.push({
+        coords: [
+          [longitude, latitude],
+          [longitude2, latitude2],
+        ],
+        value: (Math.random() * 3000).toFixed(2),
+      });
+    }
+    console.log(res, 'rodamData')
+    return res
+  }
+  const coords = (arr: number[][]) => {
+    const res = []
+    for (let i = 0; i < arr.length; i += 100) {
+      res.push(
+        {
+          type: 'scatter3D',
+          coordinateSystem: 'globe',
+          symbolSize: 2,
+          data: [
+            {
+              // name: '北京',
+              value: arr[i], // 北京的经纬度和海拔高度
+              itemStyle: {
+                width: 2,
+                color: 'red', // 标点的颜色
+              },
+            },
+          ],
+          label: {
+            show: true,
+            formatter: '{b}',
+          },
+        })
+    }
+    console.log(res, 'res')
+    return res
+  }
   useEffect(() => {
-    var chartDom = document.getElementById('mapContainer');
-    var myChart = echarts.init(chartDom);
-    const option = {
-      title: {
-        text: 'Temperature Change in the Coming Week'
-      },
-      tooltip: {
-        trigger: 'axis'
-      },
-      legend: {},
-      toolbox: {
-        show: true,
-        feature: {
-          dataZoom: {
-            yAxisIndex: 'none'
+    console.log(props)
+    const MapChart = echarts.init(document.getElementById('container'));
+    const initEchart = async () => {
+      const option = {
+        globe: {
+          baseTexture: mapImg,
+          shading: 'lambert',
+          viewControl: {
+            autoRotate: false,
+            alpha: 40,
+            beta: 196,
+            minDistance: 300,
+            maxDistance: 300,
+            zoomSensitivity: 0
           },
-          dataView: { readOnly: false },
-          magicType: { type: ['line', 'bar'] },
-          restore: {},
-          saveAsImage: {}
-        }
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          formatter: '{value} °C'
-        }
-      },
-      series: [
-        {
-          name: 'Highest',
-          type: 'line',
-          data: [10, 11, 13, 11, 12, 12, 9],
-          markPoint: {
-            data: [
-              { type: 'max', name: 'Max' },
-              { type: 'min', name: 'Min' }
-            ]
+          light: {
+            ambient: {
+              intensity: 1.5
+            },
+            main: {
+              intensity: 0
+            }
           },
-          markLine: {
-            data: [{ type: 'average', name: 'Avg' }]
-          }
         },
-        {
-          name: 'Lowest',
-          type: 'line',
-          data: [1, -2, 2, 5, 3, 2, 0],
-          markPoint: {
-            data: [{ name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }]
-          },
-          markLine: {
+        series: [
+          // ...coords(props.chinaGeo),
+          {
+            type: 'scatter3D',
+            coordinateSystem: 'globe',
+            symbolSize: 10,
             data: [
-              { type: 'average', name: 'Avg' },
-              [
-                {
-                  symbol: 'none',
-                  x: '90%',
-                  yAxis: 'max'
+              {
+                name: '北京',
+                value: [116.407394, 39.904211, 0], // 北京的经纬度和海拔高度
+                itemStyle: {
+                  color: 'red', // 标点的颜色
                 },
-                {
-                  symbol: 'circle',
-                  label: {
-                    position: 'start',
-                    formatter: 'Max'
-                  },
-                  type: 'max',
-                  name: '最高点'
-                }
-              ]
-            ]
-          }
-        }
-      ]
-    };
-    option && myChart.setOption(option);
+              },
+            ],
+            label: {
+              show: true,
+              formatter: '{b}',
+            },
+          },
+          {
+            type: "lines3D",
+            coordinateSystem: "globe",
+            effect: {
+              show: true,
+            },
+            blendMode: "lighter",
+            lineStyle: {
+              width: 2,
+            },
+            data: rodamData(100),
+            silent: false,
+          },
+        ],
+      };
+      option && MapChart.setOption(option);
+    }
+    initEchart()
+    window.addEventListener('resize', () => {
+      MapChart.resize();
+    });
     return () => {
-      myChart.dispose();
+      window.removeEventListener("resize", () => {
+        MapChart.resize();
+      });
+      MapChart.dispose();
     };
-  }, []);
+  }, [props]);
   return (
-    <div id="mapContainer" style={{ width: "100%", height: "500px" }}>
-      {/* 这里可以添加更多的 react-bmapgl 组件，例如标记点 */}
-    </div>
+    <div id="container" style={{ width: '100%', height: '100%' }}></div>
   );
 }
 

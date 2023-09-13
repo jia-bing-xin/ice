@@ -1,0 +1,14 @@
+.login-box{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: url('@/assets/img/星空.jpg') no-repeat;
+  background-size: cover;
+  // .login-echart{
+  //   flex: 1;
+  //   height: 100%;
+  // }
+  .login-form{
+    width: 500px;
+  }
+}
